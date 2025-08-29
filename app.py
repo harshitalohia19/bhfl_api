@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-FULL_NAME = "john_doe"  # replace with your lowercase full name
-DOB = "17091999"        # replace with your dob ddmmyyyy
-EMAIL = "john@xyz.com"  # replace with your email
-ROLL_NUMBER = "ABCD123" # replace with your roll number
+FULL_NAME = "harshita_loha"  
+DOB = "19072004"        
+EMAIL = "harshitalohia@gmail.com"  
+ROLL_NUMBER = "22BRS1084"
 
 @app.route("/bfhl", methods=["POST"])
 def bfhl():
@@ -16,7 +16,7 @@ def bfhl():
         even_numbers = []
         alphabets = []
         special_characters = []
-        concat_chars = []
+        alpha_concat = ""
         total_sum = 0
 
         for item in data:
@@ -29,15 +29,16 @@ def bfhl():
                 total_sum += num
             elif item.isalpha():
                 alphabets.append(item.upper())
-                concat_chars.append(item)
+                alpha_concat += item  # keep original form for concat string
             else:
                 special_characters.append(item)
 
-        # alternating caps in reverse order
-        concat_string = ""
-        concat_chars.reverse()
-        for i, ch in enumerate("".join(concat_chars)):
-            concat_string += ch.upper() if i % 2 == 0 else ch.lower()
+        # concat, reverse, alternating caps
+        reversed_alpha = alpha_concat[::-1]
+        concat_string = "".join(
+            ch.upper() if i % 2 == 0 else ch.lower()
+            for i, ch in enumerate(reversed_alpha)
+        )
 
         response = {
             "is_success": True,
